@@ -1,0 +1,73 @@
+import { Meta } from '@storybook/blocks'
+
+<Meta title="Introduction/Overview" />
+
+# @yokoworks/a11y-kit
+
+A lightweight, accessibility-first UI kit built on top of Radix Primitives.
+Focus: **practical defaults**, **visible focus ring (cannot be disabled)**, and **clear responsibility boundaries**.
+
+---
+
+## Design Tokens (minimum)
+
+* `color.{primary|neutral|success|warning|danger}.{base|hover|fg}`
+* `space.{xs|sm|md|lg|xl}`
+* `radius.{sm|md|lg}`
+* `ring.{color|width|offset}`
+* `font.{family|size.base|line-height.base}`
+
+To use tokens:
+
+```ts
+import '@yokoworks/a11y-kit/theme'
+```
+
+---
+
+## Common API (for most components)
+
+| Prop        | Type                                | Default   | Notes                                  |
+| ----------- | ----------------------------------- | --------- | -------------------------------------- |
+| `variant`   | `'default' \| 'outline' \| 'ghost'` | `default` | Visual style                           |
+| `size`      | `'sm' \| 'md' \| 'lg'`              | `md`      | Size scale                             |
+| `disabled`  | `boolean`                           | `false`   | Native disabled                        |
+| `className` | `string`                            | `-`       | Extend/override classes                |
+| `asChild`   | `boolean`                           | `false`   | Radix asChild passthrough (when exist) |
+
+---
+
+## Accessibility Guardrails (library policy)
+
+* **Focus ring is always visible** (`:focus-visible`) and **cannot be disabled**.
+  Color/width/offset are customizable via tokens.
+* **Icon-only buttons require an accessible name**.
+  Missing name triggers a dev-time warning.
+* **Dialog**: initial focus target and return focus are **required** (API or documented pattern).
+* **Forms**: error/help text must be linked via `aria-describedby`; helper utilities provided.
+
+---
+
+## Responsibility Boundaries (per component)
+
+| Component      | Radix Guarantees                            | Library Guarantees                                | You (Consumer)                                    |
+| -------------- | ------------------------------------------- | ------------------------------------------------- | ------------------------------------------------- |
+| `Dialog`       | Focus trap, ARIA roles, portal              | Enforced visible focus ring, API for focus return | Choose initial focus, provide labels/descriptions |
+| `DropdownMenu` | Roving tabindex, keyboard navigation, roles | Visible focus ring, minimal styling               | Provide item labels, handle actions               |
+| `Tooltip`      | Positioning, show/hide semantics            | Delay defaults, ring consistency                  | Use for supplemental info only                    |
+| `Input`        | Native semantics                            | Error/Help components & linking guidance          | Link via `aria-describedby`                       |
+
+---
+
+## Getting Started
+
+```bash
+pnpm add @yokoworks/a11y-kit
+```
+
+```ts
+import '@yokoworks/a11y-kit/theme'
+// then import components (coming in v0.1+)
+```
+
+> High-contrast theme reserved: `.theme-contrast` (to be implemented in v0.x)
