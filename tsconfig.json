@@ -1,0 +1,5 @@
+{
+  "files": [],
+  "references": [{ "path": "./packages/a11y-kit" }],
+  "compilerOptions": { "skipLibCheck": true }
+}
