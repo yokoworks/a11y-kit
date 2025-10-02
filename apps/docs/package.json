@@ -2,6 +2,7 @@
   "name": "@docs",
   "private": true,
   "scripts": {
+    "prestorybook": "pnpm -w --filter @yokoworks/a11y-kit run build",
     "storybook": "storybook dev -p 6006",
     "build": "storybook build"
   },

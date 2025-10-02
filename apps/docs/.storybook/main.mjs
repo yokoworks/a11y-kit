@@ -5,11 +5,9 @@ import { fileURLToPath } from 'node:url';
 const config = {
   framework: { name: '@storybook/react-vite', options: {} },
   stories: [
-    '../src/**/*.mdx',
-    '../src/**/*.stories.@(ts|tsx)',
     '../stories/**/*.mdx',
-    '../stories/**/*.stories.@(ts|tsx)',
-    '../../packages/**/*.stories.@(ts|tsx|mdx)',
+    '../stories/**/*.stories.@(ts|tsx|mdx)',
+    '../../../packages/**/src/**/*.stories.@(ts|tsx|mdx)',
   ],
   addons: ['@storybook/addon-essentials'],
   viteFinal: async (cfg) => {
