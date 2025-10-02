@@ -19,14 +19,14 @@ const config = {
     cfg.resolve ??= {};
     cfg.resolve.alias = {
       ...(cfg.resolve.alias || {}),
-      '@yokoworks/a11y-kit': path.resolve(
-        __dirname,
-        '../../../packages/a11y-kit/src'
-      ),
-      '@yokoworks/a11y-kit/theme': path.resolve(
-        __dirname,
-        '../../../packages/a11y-kit/src/theme/index.ts'
-      ),
+      // '@yokoworks/a11y-kit': path.resolve(
+      //   __dirname,
+      //   '../../../packages/a11y-kit/src'
+      // ),
+      // '@yokoworks/a11y-kit/theme': path.resolve(
+      //   __dirname,
+      //   '../../../packages/a11y-kit/src/theme/index.ts'
+      // ),
     };
     return cfg;
   },
