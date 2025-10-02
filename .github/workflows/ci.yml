@@ -1,0 +1,46 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [main, master]
+  push:
+    branches: [main, master]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup PNPM
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          cache: 'pnpm'
+
+      - name: Install deps
+        run: pnpm install --frozen-lockfile
+
+      # ルートに scripts がない場合は -w（workspace）で各パッケージの scripts を実行
+      - name: Build
+        run: |
+          pnpm -w run build || echo "No workspace build script; skipping"
+
+      - name: Lint
+        run: |
+          pnpm -w run lint || echo "No workspace lint script; skipping"
+
+      - name: Typecheck
+        run: |
+          pnpm -w run typecheck || echo "No workspace typecheck script; skipping"

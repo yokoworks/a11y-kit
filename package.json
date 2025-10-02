@@ -7,9 +7,9 @@
     "examples/*"
   ],
   "scripts": {
-    "build": "pnpm -C packages/a11y-kit build",
-    "lint": "pnpm -C packages/a11y-kit lint",
-    "typecheck": "pnpm -C packages/a11y-kit typecheck"
+    "build": "pnpm -r --parallel run build",
+    "lint": "pnpm -r --parallel run lint",
+    "typecheck": "pnpm -r --parallel run typecheck"
   },
   "devDependencies": {
     "@eslint/js": "^9.36.0",
