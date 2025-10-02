@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/blocks'
+import { Meta } from '@storybook/blocks';
 
 <Meta title="Introduction/Overview" />
 
@@ -11,16 +11,16 @@ Focus: **practical defaults**, **visible focus ring (cannot be disabled)**, and 
 
 ## Design Tokens (minimum)
 
-* `color.{primary|neutral|success|warning|danger}.{base|hover|fg}`
-* `space.{xs|sm|md|lg|xl}`
-* `radius.{sm|md|lg}`
-* `ring.{color|width|offset}`
-* `font.{family|size.base|line-height.base}`
+- `color.{primary|neutral|success|warning|danger}.{base|hover|fg}`
+- `space.{xs|sm|md|lg|xl}`
+- `radius.{sm|md|lg}`
+- `ring.{color|width|offset}`
+- `font.{family|size.base|line-height.base}`
 
 To use tokens:
 
 ```ts
-import '@yokoworks/a11y-kit/theme'
+import '@yokoworks/a11y-kit/theme';
 ```
 
 ---
@@ -39,12 +39,12 @@ import '@yokoworks/a11y-kit/theme'
 
 ## Accessibility Guardrails (library policy)
 
-* **Focus ring is always visible** (`:focus-visible`) and **cannot be disabled**.
+- **Focus ring is always visible** (`:focus-visible`) and **cannot be disabled**.
   Color/width/offset are customizable via tokens.
-* **Icon-only buttons require an accessible name**.
+- **Icon-only buttons require an accessible name**.
   Missing name triggers a dev-time warning.
-* **Dialog**: initial focus target and return focus are **required** (API or documented pattern).
-* **Forms**: error/help text must be linked via `aria-describedby`; helper utilities provided.
+- **Dialog**: initial focus target and return focus are **required** (API or documented pattern).
+- **Forms**: error/help text must be linked via `aria-describedby`; helper utilities provided.
 
 ---
 
@@ -66,7 +66,7 @@ pnpm add @yokoworks/a11y-kit
 ```
 
 ```ts
-import '@yokoworks/a11y-kit/theme'
+import '@yokoworks/a11y-kit/theme';
 // then import components (coming in v0.1+)
 ```
 

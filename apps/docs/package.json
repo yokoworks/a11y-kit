@@ -8,6 +8,8 @@
   "devDependencies": {
     "@storybook/addon-essentials": "^8.0.0",
     "@storybook/react": "^8.0.0",
-    "@storybook/react-vite": "^8.0.0"
+    "@storybook/react-vite": "^8.6.14",
+    "storybook": "8.6.14",
+    "@yokoworks/a11y-kit": "workspace:*"
   }
 }

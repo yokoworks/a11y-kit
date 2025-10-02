@@ -10,8 +10,15 @@
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
+    },
+    "./theme": {
+      "types": "./src/theme/index.ts",
+      "import": "./src/theme/index.ts"
     }
   },
+  "sideEffects": [
+    "*.css"
+  ],
   "scripts": {
     "build": "tsup src/index.ts --dts --format esm --clean",
     "lint": "eslint . --ext .ts,.tsx",
