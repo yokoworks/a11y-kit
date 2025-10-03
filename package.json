@@ -7,7 +7,8 @@
     "examples/*"
   ],
   "scripts": {
-    "build": "pnpm -r --parallel run build",
+    "build": "echo \"(root) use 'pnpm run build:all' instead\"",
+    "build:all": "pnpm -r --parallel run build",
     "lint": "pnpm -r --parallel run lint",
     "typecheck": "pnpm -r --parallel run typecheck",
     "storybook": "pnpm --filter @docs run storybook"

@@ -14,10 +14,16 @@
     "./theme": {
       "types": "./dist/theme/index.d.ts",
       "import": "./dist/theme/index.js"
+    },
+    "./theme/style.css": {
+      "default": "./dist/theme/index.css"
     }
   },
   "sideEffects": [
-    "*.css"
+    "*.css",
+    "dist/theme/index.css",
+    "src/theme/tokens.css",
+    "src/theme/index.ts"
   ],
   "files": [
     "dist"

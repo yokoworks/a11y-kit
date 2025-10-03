@@ -2,14 +2,15 @@
   "name": "@docs",
   "private": true,
   "scripts": {
-    "prestorybook": "pnpm -w --filter @yokoworks/a11y-kit run build",
+    "prestorybook": "pnpm -C ../../packages/a11y-kit run build",
     "storybook": "storybook dev -p 6006",
     "build": "storybook build"
   },
   "devDependencies": {
-    "@storybook/addon-essentials": "^8.0.0",
-    "@storybook/react": "^8.0.0",
-    "@storybook/react-vite": "^8.6.14",
+    "@storybook/react": "8.6.14",
+    "@storybook/react-vite": "8.6.14",
+    "@storybook/addon-essentials": "8.6.14",
+    "@storybook/addon-a11y": "8.6.14",
     "@types/node": "^20.19.19",
     "@yokoworks/a11y-kit": "workspace:*",
     "storybook": "8.6.14"
