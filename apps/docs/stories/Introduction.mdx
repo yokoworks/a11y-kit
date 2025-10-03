@@ -50,12 +50,14 @@ import '@yokoworks/a11y-kit/theme';
 
 ## Responsibility Boundaries (per component)
 
-| Component      | Radix Guarantees                            | Library Guarantees                                | You (Consumer)                                    |
-| -------------- | ------------------------------------------- | ------------------------------------------------- | ------------------------------------------------- |
-| `Dialog`       | Focus trap, ARIA roles, portal              | Enforced visible focus ring, API for focus return | Choose initial focus, provide labels/descriptions |
-| `DropdownMenu` | Roving tabindex, keyboard navigation, roles | Visible focus ring, minimal styling               | Provide item labels, handle actions               |
-| `Tooltip`      | Positioning, show/hide semantics            | Delay defaults, ring consistency                  | Use for supplemental info only                    |
-| `Input`        | Native semantics                            | Error/Help components & linking guidance          | Link via `aria-describedby`                       |
+| Component                               | Radix Guarantees                            | Library Guarantees                                | You (Consumer)                                    |
+| --------------------------------------- | ------------------------------------------- | ------------------------------------------------- | ------------------------------------------------- |
+| `Dialog`                                | Focus trap, ARIA roles, portal              | Enforced visible focus ring, API for focus return | Choose initial focus, provide labels/descriptions |
+| `DropdownMenu`                          | Roving tabindex, keyboard navigation, roles | Visible focus ring, minimal styling               | Provide item labels, handle actions               |
+| `Tooltip`                               | Positioning, show/hide semantics            | Delay defaults, ring consistency                  | Use for supplemental info only                    |
+| `Input`                                 | Native semantics                            | Error/Help components & linking guidance          | Link via `aria-describedby`                       |
+| FormField has exactly one control child | ✅                                          |                                                   |
+| Provide non-empty label                 |                                             | ✅                                                |
 
 ---
 

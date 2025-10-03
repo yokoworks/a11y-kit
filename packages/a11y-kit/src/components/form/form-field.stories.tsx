@@ -55,3 +55,22 @@ export const TextAreaExample: Story = {
     </div>
   ),
 };
+
+export const MissingLabel_DevWarning: Story = {
+  args: { label: '', helper: 'Helper text' },
+  render: (args) => (
+    <div style={{ maxWidth: 360 }}>
+      <FormField {...args}>
+        <Input type="text" />
+      </FormField>
+    </div>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Intentionally missing `label` to show the dev console warning from a11y guards.',
+      },
+    },
+  },
+};

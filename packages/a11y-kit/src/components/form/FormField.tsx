@@ -3,6 +3,7 @@ import { useAutoId } from '../../utils/id';
 import { ErrorText } from './ErrorText';
 import { HelperText } from './HelperText';
 import { Label } from './Label';
+import { guardFormFieldBasics } from '../../a11y/guards';
 
 type FormFieldProps = {
   id?: string;
@@ -20,6 +21,9 @@ export const FormField = React.forwardRef<HTMLDivElement, FormFieldProps>(
     { id, label, helper, error, invalid, required, children, className },
     ref
   ) => {
+    // Dev-only guard rails
+    guardFormFieldBasics({ label, children });
+
     const baseId = id ?? useAutoId('field');
     const inputId = `${baseId}-input`;
     const labelId = `${baseId}-label`;
