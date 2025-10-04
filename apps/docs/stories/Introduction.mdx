@@ -50,16 +50,36 @@ import '@yokoworks/a11y-kit/theme';
 
 ## Responsibility Boundaries (per component)
 
-| Component                                | Radix Guarantees                            | Library Guarantees                                | You (Consumer)                                    |
-| ---------------------------------------- | ------------------------------------------- | ------------------------------------------------- | ------------------------------------------------- |
-| `Dialog`                                 | Focus trap, ARIA roles, portal              | Enforced visible focus ring, API for focus return | Choose initial focus, provide labels/descriptions |
-| `DropdownMenu`                           | Roving tabindex, keyboard navigation, roles | Visible focus ring, minimal styling               | Provide item labels, handle actions               |
-| `Tooltip`                                | Positioning, show/hide semantics            | Delay defaults, ring consistency                  | Use for supplemental info only                    |
-| `Input`                                  | Native semantics                            | Error/Help components & linking guidance          | Link via `aria-describedby`                       |
-| **FormField: exactly one control child** |                                             | ✅ (dev-only guard detects multiple children)     |                                                   |
-| **FormField: provide non-empty label**   |                                             |                                                   | ✅ (write the visible label text)                 |
+### Dialog
 
-> **Note:** `aria-describedby` concatenates IDs **in order**; this library wires **helper first, then error** so screen readers read “help text… then error message”.
+- **Radix:** Focus trap, ARIA roles, portal
+- **Library:** Enforced visible focus ring, API for focus return
+- **You:** Choose initial focus, provide labels/descriptions
+
+### DropdownMenu
+
+- **Radix:** Roving tabindex, keyboard navigation, roles
+- **Library:** Visible focus ring, minimal styling
+- **You:** Provide item labels, handle actions
+
+### Tooltip
+
+- **Radix:** Positioning, show/hide semantics
+- **Library:** Delay defaults, ring consistency
+- **You:** Use for supplemental info only
+
+### Input
+
+- **Radix:** Native semantics
+- **Library:** Error/Help components & linking guidance
+- **You:** Link via `aria-describedby`
+
+### FormField
+
+- ✅ Exactly **one control child** (guarded in dev)
+- ✅ Non-empty visible **label** required
+- ✅ `aria-describedby` automatically concatenates **helper → error**  
+  → Screen readers will read “help text… then error message”
 
 ---
 
