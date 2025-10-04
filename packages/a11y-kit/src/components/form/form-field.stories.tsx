@@ -74,3 +74,48 @@ export const MissingLabel_DevWarning: Story = {
     },
   },
 };
+
+export const MultipleChildren_DevWarning: Story = {
+  args: { label: 'Two controls (bad)' },
+  render: (args) => (
+    <div style={{ maxWidth: 360 }}>
+      <FormField {...args}>
+        <>
+          <Input type="text" />
+          <TextArea rows={2} />
+        </>
+      </FormField>
+    </div>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'This intentionally renders two controls to trigger a dev-only guard (expects exactly ONE child).',
+      },
+    },
+  },
+};
+
+export const HelperThenError_OrderCheck: Story = {
+  args: {
+    label: 'Email',
+    helper: 'We never share your email.',
+    error: 'Required',
+    invalid: true,
+  },
+  render: (args) => (
+    <div style={{ maxWidth: 360 }}>
+      <FormField {...args}>
+        <Input type="email" placeholder="you@example.com" />
+      </FormField>
+    </div>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: 'Checks that `aria-describedby` lists helper first, then error.',
+      },
+    },
+  },
+};

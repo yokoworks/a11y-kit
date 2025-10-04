@@ -1,11 +1,18 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import * as React from 'react';
 
-// Be robust across Vite / Storybook / tsup builds
-const isDev =
-  typeof import.meta !== 'undefined' && (import.meta as any).env?.MODE
-    ? (import.meta as any).env.MODE === 'development'
-    : true; // fallback to dev if env is unknown
+let __forceDevForTests = false;
+export function __setDevForTests(v: boolean) {
+  __forceDevForTests = v;
+}
+
+export const isDev = () =>
+  __forceDevForTests ||
+  (typeof process !== 'undefined' && process.env?.NODE_ENV !== 'production') ||
+  (typeof import.meta !== 'undefined' &&
+    (import.meta as any).env?.DEV === true) ||
+  (typeof import.meta !== 'undefined' &&
+    (import.meta as any).env?.MODE === 'development');
 
 // simple once-per-tick dedupe
 const warned = new Set<string>();
@@ -13,7 +20,6 @@ let flushScheduled = false;
 function scheduleFlush() {
   if (flushScheduled) return;
   flushScheduled = true;
-  // reset each macrotask to avoid spamming
   setTimeout(() => {
     warned.clear();
     flushScheduled = false;
@@ -21,7 +27,7 @@ function scheduleFlush() {
 }
 
 export function warnA11y(message: string) {
-  if (!isDev || typeof console === 'undefined') return;
+  if (!isDev() || typeof console === 'undefined') return;
   if (warned.has(message)) return;
   warned.add(message);
   scheduleFlush();
@@ -32,25 +38,19 @@ function hasTextNode(node: React.ReactNode): boolean {
   if (typeof node === 'string') return node.trim().length > 0;
   if (typeof node === 'number') return String(node).trim().length > 0;
   if (Array.isArray(node)) return node.some(hasTextNode);
-  return false; // ReactElement / object / boolean / null は探索しない
+  return false;
 }
-/**
- * Warn when an icon-only button lacks an accessible name.
- * Triggers only in dev builds.
- */
+
 export function guardIconOnlyButtonA11y(opts: {
   children: React.ReactNode;
   ariaLabel?: string;
   ariaLabelledBy?: string;
   compName?: string;
 }) {
-  if (!isDev) return;
-
+  if (!isDev()) return;
   const { children, ariaLabel, ariaLabelledBy, compName = 'Button' } = opts;
-
   const hasTextChild = hasTextNode(children);
   const hasAccessibleName = !!(ariaLabel || ariaLabelledBy);
-
   if (!hasTextChild && !hasAccessibleName) {
     warnA11y(
       `${compName}: icon-only usage detected without accessible name. ` +
@@ -62,12 +62,11 @@ export function guardIconOnlyButtonA11y(opts: {
 export function guardFormFieldBasics(opts: {
   compName?: string;
   label?: React.ReactNode;
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }) {
-  if (!isDev) return;
+  if (!isDev()) return;
   const { compName = 'FormField', label, children } = opts;
 
-  // label must be present and non-empty (string or node)
   const labelEmpty =
     label == null ||
     (typeof label === 'string' && label.trim().length === 0) ||
@@ -79,10 +78,10 @@ export function guardFormFieldBasics(opts: {
     );
   }
 
-  const count = Array.isArray(children) ? children.length : children ? 1 : 0;
-  if (count !== 1) {
+  const kids = React.Children.toArray(children).filter(Boolean);
+  if (kids.length !== 1) {
     warnA11y(
-      `${compName}: expects exactly ONE form control as its child. Received ${count}.`
+      `${compName}: expects exactly ONE form control as its child. Received ${kids.length}.`
     );
   }
 }
